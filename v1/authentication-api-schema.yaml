@@ -1,0 +1,135 @@
+components:
+  schemas:
+    TokenDTO:
+      required:
+        - token
+      properties:
+        token:
+          type: string
+    VersionDTO:
+      required:
+        - version
+      properties:
+        version:
+          type: string
+    ErrorDTO:
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+      required:
+        - code
+        - message
+      type: object
+    PermissionDTO:
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+    RoleDTO:
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionDTO'
+    CompanyDTO:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+    UserStatusDTO:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+        - PENDING_VALIDATION
+    UserTypeDTO:
+      type: string
+      enum:
+        - ADMIN
+        - AUX_ADMIN
+        - SYSTEM
+        - RECRUITER
+        - SEEKER
+    UserDTO:
+      required:
+        - username
+        - email
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        status:
+          $ref: '#/components/schemas/UserStatusDTO'
+        type:
+          $ref: '#/components/schemas/UserTypeDTO'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDTO'
+        businessCenters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+      type: object
+    IntrospectionDTO:
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDTO'
+        active:
+          type: boolean
+      type: object
+    LoginDTO:
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+      type: object
+    RegisterDTO:
+      allOf:
+        - $ref: '#/components/schemas/UserDTO'
+        - required:
+            - password
+            - confirmPassword
+          properties:
+            password:
+              type: string
+            confirmPassword:
+              type: string
+          type: object
+    JobSeekerRegisterDTO:
+      allOf:
+        - $ref: '#/components/schemas/RegisterDTO'
+    RecruiterRegisterDTO:
+      allOf:
+        - $ref: '#/components/schemas/RegisterDTO'
+        - required:
+            - companyName
+          properties:
+            companyName:
+              type: string
+          type: object

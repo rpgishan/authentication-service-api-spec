@@ -15,7 +15,7 @@ paths:
     post:
       operationId: introspect
       security:
-        - authorizationHeader: [ ]
+        - AuthorizationHeader: [ ]
       responses:
         "200":
           content:
@@ -38,7 +38,7 @@ paths:
     get:
       operationId: userGet
       security:
-        - authorizationHeader: [ ]
+        - AuthorizationHeader: [ ]
       parameters:
         - explode: true
           in: query
@@ -68,7 +68,7 @@ paths:
     post:
       operationId: addNewUser
       security:
-        - authorizationHeader: [ ]
+        - AuthorizationHeader: [ ]
       parameters:
         - explode: true
           in: query
@@ -104,7 +104,7 @@ paths:
     put:
       operationId: userUpdate
       security:
-        - authorizationHeader: [ ]
+        - AuthorizationHeader: [ ]
       parameters:
         - explode: true
           in: query
@@ -141,7 +141,7 @@ paths:
     get:
       operationId: allUsersGet
       security:
-        - authorizationHeader: [ ]
+        - AuthorizationHeader: [ ]
       responses:
         "200":
           content:
@@ -166,7 +166,7 @@ paths:
     post:
       operationId: refreshToken
       security:
-        - authorizationHeader: [ ]
+        - AuthorizationHeader: [ ]
       responses:
         "200":
           content:
@@ -239,3 +239,8 @@ paths:
       x-accepts: application/json
       x-tags:
         - tag: authentication-controller
+components:
+  securitySchemes:
+    AuthorizationHeader:
+      type: http
+      scheme: bearer

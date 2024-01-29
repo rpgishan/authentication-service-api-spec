@@ -11,27 +11,6 @@ servers:
   - description: Server url
     url: http://localhost:8081
 paths:
-  /version:
-    get:
-      operationId: version
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/VersionDTO'
-          description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
-          description: unexpected error
-      tags:
-        - common-controller
-      x-accepts: application/json
-      x-tags:
-        - tag: common-controller
   /introspect:
     post:
       operationId: introspect
@@ -48,7 +27,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - introspect-controller
@@ -79,7 +58,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -115,7 +94,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -151,7 +130,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -176,7 +155,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -199,7 +178,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - authentication-controller
@@ -226,7 +205,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - authentication-controller
@@ -253,7 +232,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'auth-api-schema.yaml#/components/schemas/ErrorDTO'
+                $ref: 'ErrorDTO'
           description: unexpected error
       tags:
         - authentication-controller

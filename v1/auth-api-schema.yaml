@@ -6,23 +6,6 @@ components:
       properties:
         token:
           type: string
-    VersionDTO:
-      required:
-        - version
-      properties:
-        version:
-          type: string
-    ErrorDTO:
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-      required:
-        - code
-        - message
-      type: object
     PermissionDTO:
       required:
         - code

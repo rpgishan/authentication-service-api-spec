@@ -11,6 +11,8 @@ servers:
   - description: Server url
     url: http://localhost:8081
 paths:
+  /version:
+    $ref: "common-api-spec.yaml#/paths/~1version"
   /introspect:
     post:
       operationId: introspect
@@ -27,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - introspect-controller
@@ -58,7 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -94,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -130,7 +132,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -155,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - user-controller
@@ -178,7 +180,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - authentication-controller
@@ -205,7 +207,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - authentication-controller
@@ -232,7 +234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'ErrorDTO'
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
           description: unexpected error
       tags:
         - authentication-controller

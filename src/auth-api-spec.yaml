@@ -1,0 +1,248 @@
+openapi: 3.0.1
+info:
+  description: Auth API of Sundance Auth Service
+  title: Auth API
+  version: 0.0.1
+  contact:
+    name: Gishan Pemathilake
+    email: rpgishan@gmail.com
+    url: https://github.com/rpgishan
+servers:
+  - description: Server url
+    url: http://localhost:8081
+paths:
+  /version:
+    $ref: "common-api-spec.yaml#/paths/~1version"
+  /introspect:
+    post:
+      operationId: introspect
+      security:
+        - AuthorizationHeader: [ ]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/IntrospectionDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - introspect-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: introspect-controller
+  /user/:
+    get:
+      operationId: userGet
+      security:
+        - AuthorizationHeader: [ ]
+      parameters:
+        - explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - user-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: user-controller
+    post:
+      operationId: addNewUser
+      security:
+        - AuthorizationHeader: [ ]
+      parameters:
+        - explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - user-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: user-controller
+    put:
+      operationId: userUpdate
+      security:
+        - AuthorizationHeader: [ ]
+      parameters:
+        - explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - user-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: user-controller
+  /user/all:
+    get:
+      operationId: allUsersGet
+      security:
+        - AuthorizationHeader: [ ]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+                type: array
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - user-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: user-controller
+  /authentication/refreshtoken:
+    post:
+      operationId: refreshToken
+      security:
+        - AuthorizationHeader: [ ]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/TokenDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - authentication-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: authentication-controller
+  /authentication/login:
+    post:
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'auth-api-schema.yaml#/components/schemas/LoginDTO'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/TokenDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - authentication-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: authentication-controller
+  /authentication/register:
+    post:
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'auth-api-schema.yaml#/components/schemas/RegisterDTO'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: 'auth-api-schema.yaml#/components/schemas/UserDTO'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: 'common-api-spec.yaml#/components/schemas/ErrorDTO'
+          description: unexpected error
+      tags:
+        - authentication-controller
+      x-accepts: application/json
+      x-tags:
+        - tag: authentication-controller
+components:
+  securitySchemes:
+    AuthorizationHeader:
+      type: http
+      scheme: bearer

@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.sundance.plugins.api.generator' version '0.0.1-SNAPSHOT'
+}
+
+group = 'com.sundance.apispecs'
+version = '0.0.1-SNAPSHOT'
+String apiSpecName = rootProject.name
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    apiSource group: 'com.sundance.apispecs', name: 'common-api-spec', version: '0.0.1-SNAPSHOT', classifier: 'openapi', ext: 'yaml'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact source: "$buildDir/generated/src/main/resources/openapi.yaml", classifier: 'openapi', extension: 'yaml'
+        }
+    }
+}
+
+String apiSpecDirectory = "$buildDir/api-specs"
+boolean isSpec = true
+
+apiSpecCopy {
+    isSpecGenerate.set(isSpec)
+    apiSpecDir.set(apiSpecDirectory)
+}
+
+apiGenerate {
+    isSpecGenerate.set(isSpec)
+    apiSpecDir.set("$buildDir/api-specs")
+    apiSpecFile.set("${apiSpecName}.yaml")
+    outputDir.set("$buildDir/generated")
+    groupId.set("$group")
+    id.set(apiSpecName)
+    version.set("$version")
+}
